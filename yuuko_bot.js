@@ -4,7 +4,7 @@ const client = new Discord.Client()
 client.on('ready', () => {
     client.user.setActivity("with yuki_momoiro722! | (u!) commands are not available.")
 })
-bot_secret_token = "Njk0NTUzNjE4Mzk3MDAzNzk5.XoNTdg.oApJpD7VU2u-AT1BLH5Q8IaXlaM"
+bot_secret_token = "xxxxxxxxxxxxxxxxxxxxxx"
 client.login(bot_secret_token)
 
 /////////////////////////////////////////////
