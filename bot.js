@@ -7,13 +7,15 @@ bot.on('ready', () => {
    bot.user.setActivity("with my master");
 });
 
-bot.on('message', msg => { // Message function
-   if (msg.author.bot) return; // Ignore all bots
-   if (msg.content.startsWith(settings.prefix)) return; // It always has to starts with the prefix which is '!'
-
-   if (msg.content.startsWith(settings.prefix + "ping")) { // When a player does '!ping'
-     msg.reply("Pong!") // The bot will say @Author, Pong!
+bot.on('message', msg => {
+   if (msg.content.startsWith(`${settings.prefix}ping`)) {
+     return msg.reply('pong!');
    }
-});
-
+   else if (msg.content === 'sora wo kakeru you na') {
+      return msg.channel.send('kokoro wo te ni shiyou ka');
+    }
+   else if (msg.content === 'kaze no hikaru tsubu') {
+      return msg.channel.send('subete ga mieru you na');
+    }
+ });
 bot.login(settings.discord_token);
