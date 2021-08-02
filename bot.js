@@ -1,54 +1,19 @@
-const { exception } = require('console')
-const Discord = require('discord.js')
-const client = new Discord.Client()
-client.on('ready', () => {
-    client.user.setActivity("with yuki_momoiro722! | (u!) commands are not available.")
-})
+const Discord = require('discord.js');
+const settings = require('./settings.json');
+const bot = new Discord.Client();
 
-/////////////////////////////////////////////
+bot.on('ready', () => {
+   console.log("READY!");
+   bot.user.setActivity("with my master");
+});
 
-client.on('message', (receivedMessage) => {
-    if (receivedMessage.author == client.user) { // Prevent bot from responding to its own messages
-        return
-    }
-    
-    if (receivedMessage.content.startsWith("u!")) {
-        processCommand(receivedMessage)
-    }
-})
-function processCommand(receivedMessage) {
-    let fullCommand = receivedMessage.content.substr(2) // Remove the leading exclamation mark
-    let splitCommand = fullCommand.split(" ") // Split the message up in to pieces for each space
-    let primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
-    let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
+bot.on('message', msg => { // Message function
+   if (msg.author.bot) return; // Ignore all bots
+   if (msg.content.startsWith(settings.prefix)) return; // It always has to starts with the prefix which is '!'
 
-    console.log("Command received: " + primaryCommand)
-    console.log("Arguments: " + arguments) // There may not be any arguments
+   if (msg.content.startsWith(settings.prefix + "ping")) { // When a player does '!ping'
+     msg.reply("Pong!") // The bot will say @Author, Pong!
+   }
+});
 
-    if (primaryCommand == "help") {
-        helpCommand(arguments, receivedMessage)
-    } else if (primaryCommand == "multiply") {
-        multiplyCommand(arguments, receivedMessage)    
-    } else {
-        receivedMessage.channel.send("I don't understand the command. Try `u!help` or `u!multiply`")
-    }
-}
-///////////////////////////////////////////////////////
-function helpCommand(arguments, receivedMessage) {
-    if (arguments.length > 0) {
-        receivedMessage.channel.send("It looks like you might need help with " + arguments)
-    } else {
-        receivedMessage.channel.send("I'm not sure what you need help with. Try `u!help [topic]`")
-    }
-}
-function multiplyCommand(arguments, receivedMessage) {
-    if (arguments.length < 2) {
-        receivedMessage.channel.send("Not enough values to multiply. Try `u!multiply 2 4 10` or `u!multiply 5.2 7`")
-        return
-    }
-    let product = 1 
-    arguments.forEach((value) => {
-        product = product * parseFloat(value)
-    })
-    receivedMessage.channel.send("The product of " + arguments + " multiplied together is: " + product.toString())
-}
+bot.login(settings.discord_token);
