@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { chmod } = require('fs');
 const settings = require('./config/settings.json');
 const bot = new Discord.Client();
-const embed = require('./minakoembed.js') 
+const embed = require('./help.js') 
 
 bot.on('ready', () => {
    console.log("READY!");
