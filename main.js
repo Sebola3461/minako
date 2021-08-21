@@ -25,7 +25,20 @@ bot.on('message', async message=>0);
          msg.channel.send({embed: richembed}); 
    }
    if (msg.content.startsWith(`${settings.prefix}ping`)) {
-      return msg.channel.send(":ping_pong: :purple_heart: pong!");
+      var msgtime1 = msg.createdTimestamp;
+      msg.channel.send(':purple_heart: :ping_pong: Pinging...')
+      .then((msg) => {
+         console.log(msgtime1);
+         console.log(msg.createdTimestamp);
+         ping = msg.createdTimestamp - msgtime1;
+         const embed = new Discord.MessageEmbed()
+         module.exports = (embed)
+         .setColor(`#FFB7E0`)
+         .setDescription(
+            ":purple_heart: :ping_pong: Pong! bot's ping is `" + ping + 'ms`.'
+            );
+            msg.channel.send(embed);
+    });
    }
 // Jokes
    if (msg.content.startsWith(`${settings.prefix}test`)) {
