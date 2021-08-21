@@ -33,11 +33,12 @@ bot.on('message', async message=>0);
          ping = msg.createdTimestamp - msgtime1;
          const embed = new Discord.MessageEmbed()
          module.exports = (embed)
-         .setColor(`#FFB7E0`)
+         .setColor(`#D9A0F3`)
          .setDescription(
             ":purple_heart: :ping_pong: Pong! bot's ping is `" + ping + 'ms`.'
             );
             msg.channel.send(embed);
+            msg.delete();
     });
    }
 // Jokes
