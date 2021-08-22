@@ -1,0 +1,54 @@
+{
+    "osu": {
+        "code": 0,
+        "name": "standard"
+    },
+    "std": {
+        "code": 0,
+        "name": "standard"
+    },
+    "o": {
+        "code": 0,
+        "name": "standard"
+    },
+    "taiko": {
+        "code": 1,
+        "name": "taiko"
+    },
+    "t": {
+        "code": 1,
+        "name": "taiko"
+    },
+    "1": {
+        "code": 1,
+        "name": "taiko"
+    },
+    "2": {
+        "code": 2,
+        "name": "catch"
+    },
+    "ctb": {
+        "code": 2,
+        "name": "catch"
+    },
+    "catch": {
+        "code": 2,
+        "name": "catch"
+    },
+    "fruits": {
+        "code": 2,
+        "name": "catch"
+    },
+    "mania": {
+        "code": 3,
+        "name": "mania"
+    },
+    "m": {
+        "code": 3,
+        "name": "mania"
+    },
+    "3": {
+        "code": 3,
+        "name": "mania"
+    }
+}
