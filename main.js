@@ -1,80 +1,39 @@
-const Discord = require('discord.js');
-const { chmod } = require('fs');
-const settings = require('./config/settings.json');
-const bot = new Discord.Client();
-// Pile of embeds
-const embed = require('./help.js') 
+/**
+ * * ==== Main ====
+ * * The brain of the bot
+ */
+
+const { Client } = require('discord.js');
+const configs = require('./config/settings.json');
+const commands = require("./commands");
+const others = require("./utils/others");
+const { MinakoError } = require('./utils/errors');
+const { MinakoDatabase } = require('./db');
+const bot = new Client();
 
 bot.on('ready', () => {
-   console.log("READY!");
-   console.log('connected');
-   console.log('logged in as: ');
-   console.log(`${bot.user.username} - (${bot.user.id})`);
-   bot.user.setActivity("with my master | m+help");
-   });
-
-bot.on('message', async message=>0);
-   { // declares a message can happen
-     var messagecount
-     messagecount = 0;
-   }
-// Bunch of commands here
-   bot.on('message', msg => {
-   if (msg.content.startsWith(`${settings.prefix}help`)) {
-         let richembed = require('./help.js');
-         msg.channel.send({embed: richembed}); 
-   }
-   if (msg.content.startsWith(`${settings.prefix}ping`)) {
-      var msgtime1 = msg.createdTimestamp;
-      msg.channel.send(':purple_heart: :ping_pong: Pinging...')
-      .then((msg) => {
-         console.log(msgtime1);
-         console.log(msg.createdTimestamp);
-         ping = msg.createdTimestamp - msgtime1;
-         const embed = new Discord.MessageEmbed()
-         module.exports = (embed)
-         .setColor(`#D9A0F3`)
-         .setDescription(
-            ":purple_heart: :ping_pong: Pong! bot's ping is `" + ping + 'ms`.'
-            );
-            msg.channel.send(embed);
-            msg.delete();
-    });
-   }
-// Jokes
-   if (msg.content.startsWith(`${settings.prefix}test`)) {
-      msg.channel.send(':purple_heart: Test failed successfully.')
-      .then(msg => {
-                    msg.delete({ timeout: 2000 /*time unitl delete in milliseconds*/});
-                })
-      .catch(/*Your Error handling if the Message isn't returned, sent, etc.*/);
-}
-// Text Jokes
-   if (msg.content === '76 keys') {
-      return msg.channel.send("nanajuuroku-nin no yousei");
-    }
-   else if (msg.content === 'minakoping') {
-      return msg.channel.send("<:minakoPing:776778137102975028>");
-    }
-   else if (msg.content === 'minakoWorried') {
-      return msg.channel.send("<:minakoPing:872275445821870091>");
-    }
-   else if (msg.content === 'minakosip') {
-      return msg.channel.send("<:minakoSip:872275441048748053>");
-    }
-   else if (msg.content === 'wat') {
-      msg.channel.send('nani?')
-      .then(msg => {
-                    msg.delete({ timeout: 2000 /*time unitl delete in milliseconds*/});
-                })
-      .catch(/*Your Error handling if the Message isn't returned, sent, etc.*/);
-   }
-   else if (msg.content === 'sora wo kakeru you na') {
-      return msg.channel.send("kokoro wo te ni shiyou ka");
-   }
-   else if (msg.content === 'minako pls remind match') {
-      return msg.channel.send("https://media.discordapp.net/attachments/564573201624203299/803028273549803540/match.gif");
-    }
+    console.log("READY!");
+    console.log(`Running at: ${bot.user.username} - (${bot.user.id})`);
+    bot.user.setActivity("hello, i like bananas!");
 });
 
-bot.login(settings.discord_token);
+bot.on("message", (message) => {
+    if (message.author.bot) return; // ? Dont reply bot users
+    if (message.content == `<@${bot.user.id}>` || message.content == `<@!${bot.user.id}>`) return others["botping"].send(message); // * Send a help embed if the bot its mentioned.
+
+    if (!message.content.startsWith(configs.prefix)) return; // ? Now, dont process messages without the prefix
+
+    MinakoDatabase.checkUser(message); // * Check if the user exists in the database
+
+    // ? Add args key to message object
+    let args = message.content.slice(configs.prefix.length).split(" ");
+
+    // * ==== Command Handler ====
+    let requestedCommand = commands[args[0]]
+
+    if (requestedCommand == undefined) return MinakoError.commandNotFound(message); // * Send a embed if the command doesnt exists.
+
+    requestedCommand.run(message, args, bot);
+})
+
+bot.login(configs.discord_token);
