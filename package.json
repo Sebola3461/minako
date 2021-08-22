@@ -1,0 +1,28 @@
+{
+  "name": "minakobot",
+  "version": "0.0.1",
+  "description": "minako bot for discord!",
+  "main": "main.js",
+  "dependencies": {
+    "@discordjs/opus": "^0.5.3",
+    "discord-player": "^4.1.4",
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0",
+    "ffmpeg": "0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "ytdl-core": "^4.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "m!test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "@minako"
+  },
+  "keywords": [
+    "bot!"
+  ],
+  "author": "yuki_momoiro722",
+  "license": "MIT"
+}
