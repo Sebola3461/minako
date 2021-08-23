@@ -10,5 +10,8 @@ exports.run = (message) => {
         \`osuplayer\` See the stats of a player
         \`osuset\` Save configs for your profile
         `)
+        .addField("**Utils**", `
+        \`ping\` See my ping!
+        `)
     message.channel.send(help)
 }
