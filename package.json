@@ -9,6 +9,7 @@
         "discord-player": "^4.1.4",
         "discord.js": "^12.5.3",
         "dotenv": "^10.0.0",
+        "fast-xml-parser": "^3.19.0",
         "ffmpeg": "0.0.4",
         "fluent-ffmpeg": "^2.1.2",
         "node-fetch": "^2.6.1",

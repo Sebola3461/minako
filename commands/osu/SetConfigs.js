@@ -13,6 +13,7 @@ exports.run = (message, args) => {
     }
 
     if (args.length > 2) {
+        params.username = args[1].replace("_", " ");
         params.mode = ModesList[args[2].replace("-", "").trimStart().trimEnd()].code;
         params.modeFormated = ModesList[args[2].replace("-", "").trimStart().trimEnd()].name;
     }
