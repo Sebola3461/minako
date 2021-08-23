@@ -120,4 +120,3 @@ dist
 #self
 config/settings.json
 db/users.json
-.gitignore
