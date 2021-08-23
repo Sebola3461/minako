@@ -14,7 +14,7 @@ const bot = new Client();
 bot.on('ready', () => {
     console.log("READY!");
     console.log(`Running at: ${bot.user.username} - (${bot.user.id})`);
-    bot.user.setActivity("hello, i like bananas!");
+    bot.user.setActivity("your commands | m+help");
 });
 
 bot.on("message", (message) => {
