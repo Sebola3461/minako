@@ -9,6 +9,7 @@ const commands = require("./commands");
 const others = require("./utils/others");
 const { MinakoError } = require('./utils/errors');
 const { MinakoDatabase } = require('./db');
+const { checkUrl } = require('./utils/others/Url');
 const bot = new Client();
 
 bot.on('ready', () => {
@@ -21,6 +22,7 @@ bot.on("message", (message) => {
     if (message.author.bot) return; // ? Dont reply bot users
     if (message.content == `<@${bot.user.id}>` || message.content == `<@!${bot.user.id}>`) return others["botping"].send(message); // * Send a help embed if the bot its mentioned.
 
+    checkUrl(message)
     if (!message.content.startsWith(configs.prefix)) return; // ? Now, dont process messages without the prefix
 
     MinakoDatabase.checkUser(message); // * Check if the user exists in the database
