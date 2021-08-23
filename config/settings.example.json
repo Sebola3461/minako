@@ -1,5 +1,6 @@
 {
     "prefix": "your_prefix",
+    "my_anime_list_token": "token",
     "osu_api_key": "your_osu apikey",
     "discord_token": "obvious"
 }

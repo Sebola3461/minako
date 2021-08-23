@@ -15,6 +15,7 @@ exports.run = (message, args) => {
     if (authorUser == undefined) return MinakoError.osuUserNotFound(message);
     if (authorUser.osu.username == "") return MinakoError.osuPlayerMissingArguments(message);
 
+
     let params = {
         username: authorUser.osu.username,
         modeFormated: authorUser.osu.modeFormated,

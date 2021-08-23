@@ -1,7 +1,16 @@
-const { writeFileSync, readFileSync } = require("fs")
+const { writeFileSync, readFileSync, existsSync } = require("fs")
 const colors = require("colors")
 
+exports.checkDatabase = () => {
+    if (existsSync(__dirname + "/../users.json") == true) return;
+
+    let db = { users: {} }
+    writeFileSync(__dirname + "/../users.json", JSON.stringify(db), "utf8")
+    console.log(`[Database] Database created!`.bgGreen)
+}
+
 exports.appendNewUser = (message) => {
+    this.checkDatabase();
     let usersDatabase = readFileSync(__dirname + "/../users.json", "utf8");
     usersDatabase = JSON.parse(usersDatabase);
     let newUser = {
@@ -23,18 +32,21 @@ exports.appendNewUser = (message) => {
 }
 
 exports.checkUser = (message) => {
+    this.checkDatabase();
     let users = require(__dirname + "/../users.json").users;
     let selectedUser = users[message.author.id];
     if (selectedUser == undefined) return this.appendNewUser(message);
 }
 
 exports.getUser = (id) => {
+    this.checkDatabase();
     let users = require(__dirname + "/../users.json").users;
     let selectedUser = users[id];
     return selectedUser;
 }
 
 exports.editUserRow = (user, row_name, new_content, message) => {
+    this.checkDatabase();
     let usersDatabase = readFileSync(__dirname + "/../users.json", "utf8");
     usersDatabase = JSON.parse(usersDatabase);
     let selectedUser = usersDatabase.users[user];
