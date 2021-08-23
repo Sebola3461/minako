@@ -1,7 +1,7 @@
 const { writeFileSync, readFileSync, existsSync } = require("fs")
 const colors = require("colors")
 
-// * Check database 
+// * Check database
 exports.checkDatabase = () => {
     if (existsSync(__dirname + "/../users.json") == true) return;
 
