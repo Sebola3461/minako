@@ -1,6 +1,7 @@
 const { writeFileSync, readFileSync, existsSync } = require("fs")
 const colors = require("colors")
 
+// * Check database
 exports.checkDatabase = () => {
     if (existsSync(__dirname + "/../users.json") == true) return;
 
@@ -14,8 +15,8 @@ exports.appendNewUser = (message) => {
     let usersDatabase = readFileSync(__dirname + "/../users.json", "utf8");
     usersDatabase = JSON.parse(usersDatabase);
     let newUser = {
+        "banned": false,
         "osu": {
-            "banned": false,
             "username": "",
             "mode": 0
         },

@@ -12,22 +12,34 @@ const ModesList = require("./rulesets/ModesList.json");
 exports.run = (message, args) => {
     let authorUser = MinakoDatabase.getUser(message.author.id);
     if (message.mentions.users.size > 0) authorUser = MinakoDatabase.getUser(message.mentions.users.first().id);
-    if (authorUser == undefined) return MinakoError.osuUserNotFound(message);
-    if (authorUser.osu.username == "") return MinakoError.osuPlayerMissingArguments(message);
-
 
     let params = {
-        username: authorUser.osu.username,
-        modeFormated: authorUser.osu.modeFormated,
-        mode: authorUser.osu.mode
+        username: "",
+        modeFormated: "standard",
+        mode: 0
     }
 
-    if (args.length > 2) {
-        params.mode = ModesList[args[2].replace("-", "").trimStart().trimEnd()];
+    if (args.length == 3) {
+        params.mode = ModesList[args[2].replace("-", "").trimStart().trimEnd()].code;
         if (params.mode == undefined) params.mode = "0";
+        params.username = args[1];
+        params.modeFormated = ModesList[`${params.mode}`].name;
+    }
+
+    if (args.length == 2) {
+        params.mode = 0;
+        if (params.mode == undefined) params.mode = "0";
+        params.username = args[1];
         params.modeFormated = ModesList["std"].name;
     }
 
+    if (args.length == 1) {
+        if (authorUser == undefined) return MinakoError.osuUserNotFound(message);
+        if (authorUser.osu.username == "") return MinakoError.osuPlayerMissingArguments(message);
+        params.username = authorUser.osu.username;
+        params.modeFormated = authorUser.osu.modeFormated;
+        params.mode = authorUser.osu.mode;
+    }
 
     getOsuPlayer(params).then(user => {
         if (user == "") return MinakoError.osuUserNotFound(message);
