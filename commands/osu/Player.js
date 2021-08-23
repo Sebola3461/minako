@@ -10,8 +10,8 @@ const { getOsuPlayer } = require("./functions/GetOsuPlayer");
 const ModesList = require("./rulesets/ModesList.json");
 
 exports.run = (message, args) => {
-    let authorUser = MinakoDatabase.getUser(message.author.id);
-    if (message.mentions.users.size > 0) authorUser = MinakoDatabase.getUser(message.mentions.users.first().id);
+    let authorUser = MinakoDatabase.users.getUser(message.author.id);
+    if (message.mentions.users.size > 0) authorUser = MinakoDatabase.users.getUser(message.mentions.users.first().id);
 
     let params = {
         username: "",

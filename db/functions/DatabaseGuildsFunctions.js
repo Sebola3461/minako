@@ -22,3 +22,39 @@ exports.getGuild = (id) => {
     let selectedGuild = guilds[id];
     return selectedGuild;
 }
+
+exports.editGuildRow = (user, row_name, new_content, message) => {
+    this.checkUsersDatabase();
+    let usersDatabase = readFileSync(__dirname + "/../users.json", "utf8");
+    usersDatabase = JSON.parse(usersDatabase);
+    let selectedUser = usersDatabase.users[user];
+
+    selectedUser[row_name] = new_content;
+
+    writeFileSync(__dirname + "/../users.json", JSON.stringify(usersDatabase), "utf8")
+    console.log(`[Database] User data changed! ${message.author.tag} (${message.author.id})`.bgYellow)
+}
+
+exports.appendNewGuild = (message) => {
+    this.checkDatabase();
+    let guildsDatabase = readFileSync(__dirname + "/../guilds.json", "utf8");
+    guildsDatabase = JSON.parse(guildsDatabase);
+    let newGuild = {
+        "prefix": "",
+        "moderation": {
+            "channels_allowed": [],
+            "users_commands_whitelist": [],
+            "banned_words": []
+        },
+        "auditlog": {
+            "enabled": false,
+            "channel": "",
+        },
+        "osu": {
+            "enable_links": true
+        }
+    }
+    guildsDatabase.guilds[message.guild.id] = newGuild;
+    writeFileSync(__dirname + "/../guilds.json", JSON.stringify(guildsDatabase), "utf8")
+    console.log(`[Database] New guild added! ${message.guild.name} (${message.guild.id})`.bgGreen.black)
+}

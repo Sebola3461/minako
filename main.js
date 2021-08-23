@@ -24,8 +24,8 @@ bot.on("message", (message) => {
 
     checkUrl(message)
     if (!message.content.startsWith(configs.prefix)) return; // ? Now, dont process messages without the prefix
-    MinakoDatabase.checkUser(message); // * Check if the user exists in the database
-    MinakoDatabase.checkGuildsDatabase(message)
+    MinakoDatabase.users.checkUser(message); // * Check if the user exists in the database
+    MinakoDatabase.guilds.checkGuildsDatabase(message)
 
     // ? Add args key to message object
     let args = message.content.slice(configs.prefix.length).split(" ");
