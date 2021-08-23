@@ -1,3 +1,6 @@
 module.exports = {
-    MinakoDatabase: require("./functions/DatabaseFunctions")
+    MinakoDatabase: {
+        users: require("./functions/DatabaseUsersFunctions"),
+        guilds: require("./functions/DatabaseGuildsFunctions")
+    }
 }

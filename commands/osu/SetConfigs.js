@@ -18,7 +18,7 @@ exports.run = (message, args) => {
         params.modeFormated = ModesList[args[2].replace("-", "").trimStart().trimEnd()].name;
     }
 
-    MinakoDatabase.editUserRow(message.author.id, "osu", params, message)
+    MinakoDatabase.users.editUserRow(message.author.id, "osu", params, message)
 
     let sucessEmbed = new MessageEmbed()
         .setTitle("Sucess!")
