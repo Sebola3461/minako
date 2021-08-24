@@ -1,4 +1,5 @@
 const { writeFileSync, readFileSync, existsSync } = require("fs")
+const configs = require("./../../config/settings.json")
 const colors = require("colors")
 
 exports.checkGuildsDatabase = () => {
@@ -10,41 +11,45 @@ exports.checkGuildsDatabase = () => {
 }
 
 exports.checkGuild = (message) => {
-    this.checkGuildDatabase();
+    this.checkGuildsDatabase();
     let guild = require(__dirname + "/../guilds.json").guilds;
     let selectedGuild = guild[message.guild.id];
-    if (selectedGuild == undefined) return this.appendNewUser(message);
+    if (selectedGuild == undefined) return this.appendNewGuild(message);
 }
 
 exports.getGuild = (id) => {
-    this.checkUsersDatabase();
-    let guilds = require(__dirname + "/../guilds.json").guilds;
+    this.checkGuildsDatabase();
+    let guilds = readFileSync(__dirname + "/../guilds.json");
+    guilds = JSON.parse(guilds).guilds
     let selectedGuild = guilds[id];
+
     return selectedGuild;
 }
 
-exports.editGuildRow = (user, row_name, new_content, message) => {
-    this.checkUsersDatabase();
-    let usersDatabase = readFileSync(__dirname + "/../users.json", "utf8");
-    usersDatabase = JSON.parse(usersDatabase);
-    let selectedUser = usersDatabase.users[user];
+exports.editGuildRow = (guild, row_name, new_content, message) => {
+    this.checkGuildsDatabase();
+    let guildsDatabase = readFileSync(__dirname + "/../guilds.json", "utf8");
+    guildsDatabase = JSON.parse(guildsDatabase);
+    let selectedGuild = guildsDatabase.guilds[guild];
 
-    selectedUser[row_name] = new_content;
+    selectedGuild[row_name] = new_content;
 
-    writeFileSync(__dirname + "/../users.json", JSON.stringify(usersDatabase), "utf8")
-    console.log(`[Database] User data changed! ${message.author.tag} (${message.author.id})`.bgYellow)
+    writeFileSync(__dirname + "/../guilds.json", JSON.stringify(guildsDatabase), "utf8")
+    console.log(`[Database] Guild data changed! ${message.guild.name} (${message.guild.id})`.bgYellow)
 }
 
 exports.appendNewGuild = (message) => {
-    this.checkDatabase();
+    this.checkGuildsDatabase();
     let guildsDatabase = readFileSync(__dirname + "/../guilds.json", "utf8");
     guildsDatabase = JSON.parse(guildsDatabase);
     let newGuild = {
-        "prefix": "",
+        "prefix": `${configs.prefix}`,
         "moderation": {
             "channels_allowed": [],
+            "channel_not_allowed_message": "Hey, you can't use commands here!",
             "users_commands_whitelist": [],
-            "banned_words": []
+            "banned_words": [],
+            "banned_word_message": "NOOO! DONT SAY THIS AGAIN! BAKA"
         },
         "auditlog": {
             "enabled": false,

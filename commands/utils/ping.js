@@ -7,7 +7,7 @@ exports.run = (message, args) => {
             ping = msg.createdTimestamp - msgtime1;
             const embed = new MessageEmbed()
             module.exports = (embed)
-                .setColor(`#FFB7E0`)
+                .setColor('#D9A0F3')
                 .setDescription(
                     ":purple_heart: :ping_pong: Pong! bot's ping is `" + ping + 'ms`.'
                 );
