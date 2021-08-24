@@ -4,6 +4,7 @@ module.exports = {
     ping: require("./utils/ping"),
     commandchannel: require("./guild/CommandChannel"),
     animesearch: require("./anime/Search"),
+    animecharacter: require("./anime/CharacterSearch"),
     setprefix: require("./guild/SetPrefix"),
     osuplayer: require("./osu/Player"),
     osuset: require("./osu/SetConfigs")

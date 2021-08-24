@@ -10,7 +10,12 @@ exports.run = (message) => {
         \`osuplayer\` See the stats of a player
         \`osuset\` Save configs for your profile
         `)
+        .addField("**Anime**", `
+        \`animesearch\` See info of an anime!
+        \`animecharacter\` See info of an anime character!
+        `)
         .addField("**Configuration**", `
+        \`setprefix\` Set my prefix here
         \`commandchannel\` Select channels my commands can be used
         `)
         .addField("**Utils**", `
