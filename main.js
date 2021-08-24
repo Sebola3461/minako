@@ -13,9 +13,10 @@ const { checkUrl } = require('./utils/others/Url');
 const bot = new Client();
 
 bot.on('ready', () => {
-    console.log("READY!");
-    console.log(`Running at: ${bot.user.username} - (${bot.user.id})`);
-    bot.user.setActivity("your commands | m+help");
+    console.log(`Ready! Running at: ${bot.user.username} - (${bot.user.id})`.bgGreen.black);
+    bot.user.setActivity("your commands | m+help", {
+        type: "LISTENING"
+    });
 });
 
 bot.on("message", (message) => {
@@ -35,7 +36,7 @@ bot.on("message", (message) => {
     // * ==== Command Handler ====
     let requestedCommand = commands[args[0]]
 
-    if (requestedCommand == undefined) return MinakoError.globalcommandNotFound(message); // * Send a embed if the command doesnt exists.
+    if (requestedCommand == undefined) return MinakoError.global.commandNotFound(message); // * Send a embed if the command doesnt exists.
 
     requestedCommand.run(message, args, bot);
 })

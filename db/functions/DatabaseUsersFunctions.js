@@ -11,7 +11,8 @@ exports.checkUsersDatabase = () => {
 
 exports.checkUser = (message) => {
     this.checkUsersDatabase();
-    let users = require(__dirname + "/../users.json").users;
+    let users = readFileSync(__dirname + "/../users.json", "utf8");
+    users = JSON.parse(users).users;
     let selectedUser = users[message.author.id];
     if (selectedUser == undefined) return this.appendNewUser(message);
 }
@@ -19,7 +20,7 @@ exports.checkUser = (message) => {
 exports.getUser = (id) => {
     this.checkUsersDatabase();
     let users = readFileSync(__dirname + "/../users.json", "utf8");
-    users = JSON.parse(users)
+    users = JSON.parse(users).users;
     let selectedUser = users[id];
     return selectedUser;
 }
@@ -33,11 +34,11 @@ exports.editUserRow = (user, row_name, new_content, message) => {
     selectedUser[row_name] = new_content;
 
     writeFileSync(__dirname + "/../users.json", JSON.stringify(usersDatabase), "utf8")
-    console.log(`[Database] User data changed! ${message.author.tag} (${message.author.id})`.bgYellow)
+    console.log(`[Database] User data changed! ${message.author.tag} (${message.author.id})`.bgBlue.black)
 }
 
 exports.appendNewUser = (message) => {
-    this.checkDatabase();
+    this.checkUsersDatabase();
     let usersDatabase = readFileSync(__dirname + "/../users.json", "utf8");
     usersDatabase = JSON.parse(usersDatabase);
     let newUser = {
