@@ -10,6 +10,7 @@ const others = require("./utils/others");
 const { MinakoError } = require('./utils/errors');
 const { MinakoDatabase } = require('./db');
 const { checkUrl } = require('./utils/others/Url');
+const { checkCommandchannel } = require('./utils/others');
 const bot = new Client();
 
 bot.on('ready', () => {
@@ -29,6 +30,8 @@ bot.on("message", (message) => {
     MinakoDatabase.users.checkUser(message); // * Check if the user exists in the database
     let prefix = MinakoDatabase.guilds.getGuild(message.guild.id).prefix;
 
+    let commandChannel = checkCommandchannel.channel(message);
+    if (commandChannel.code == 400) return message.channel.send(commandChannel.message);
 
     // ? Add args key to message object
     let args = message.content.slice(prefix.length).split(" ");
