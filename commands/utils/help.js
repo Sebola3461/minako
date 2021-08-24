@@ -10,6 +10,9 @@ exports.run = (message) => {
         \`osuplayer\` See the stats of a player
         \`osuset\` Save configs for your profile
         `)
+        .addField("**Configuration**", `
+        \`commandchannel\` Select channels my commands can be used
+        `)
         .addField("**Utils**", `
         \`ping\` See my ping!
         `)

@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { MinakoDatabase } = require("../../db");
+const { MinakoDatabase } = require("../../../db");
 
 exports.userNotFound = (message) => {
     let embed = new MessageEmbed()

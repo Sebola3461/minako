@@ -4,15 +4,15 @@ const { MinakoError } = require("../../utils/errors")
 const { addCommandChannel, removeCommandChannel, returnCommandChannels } = require("./functions/CommandChannel")
 
 exports.run = (message, args) => {
-    if (args.length < 3 && args[1] != "list") return MinakoError.global.commandInvalidArguments(message, "commandchannel", "`(add/remove/list)` `#channel-to-allow-command`", "`add` `#commands`");
+    if (args.length < 3 && args[1] != "list") return MinakoError.commandChannel.invalidArgs(message, "commandchannel", "`(add/remove/list)` `#channel-to-allow-command`", "`add` `#commands`");
 
-    if ((!args[1] == "add" || !args[1] == "remove") == true) return MinakoError.global.commandInvalidArguments(message, "commandchannel", "`(add/remove)` `#channel-to-allow-command`", "`add` `#commands`", "`list` option don't need a mentioned channel");
+    if ((!args[1] == "add" || !args[1] == "remove") == true) return MinakoError.commandChannel.invalidArgs(message, "commandchannel", "`(add/remove)` `#channel-to-allow-command`", "`add` `#commands`", "`list` option don't need a mentioned channel");
 
     if (args[1] == "add") {
-        if (message.mentions.channels.size == 0) return MinakoError.global.commandChannelInvalidArgs(message);
+        if (message.mentions.channels.size == 0) return MinakoError.commandChannel.invalidArgs(message);
 
         const action = addCommandChannel(message, message.guild.id, message.mentions.channels.first().id)
-        if (action.code != 200) return MinakoError.global.commandChannelDuplicated(message)
+        if (action.code != 200) return MinakoError.commandChannel.channelDuplicated(message)
 
         const currentChannels = returnCommandChannels(message.guild.id);
 
@@ -34,7 +34,7 @@ exports.run = (message, args) => {
     if (args[1] == "remove") {
         if (message.mentions.channels.size == 0) return MinakoError.global.commandChannelInvalidArgs(message);
         const action = removeCommandChannel(message, message.guild.id, message.mentions.channels.first().id)
-        if (action.code != 200) return MinakoError.global.commandChannelNotFound(message)
+        if (action.code != 200) return MinakoError.commandChannel.channelNotFound(message)
 
 
         const currentChannels = returnCommandChannels(message.guild.id);
