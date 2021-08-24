@@ -34,15 +34,15 @@ exports.run = (message, args) => {
     }
 
     if (args.length == 1) {
-        if (authorUser == undefined) return MinakoError.osuUserNotFound(message);
-        if (authorUser.osu.username == "") return MinakoError.osuPlayerMissingArguments(message);
+        if (authorUser == undefined) return MinakoError.osu.userNotFound(message);
+        if (authorUser.osu.username == "") return MinakoError.osu.playerMissingArguments(message);
         params.username = authorUser.osu.username;
         params.modeFormated = authorUser.osu.modeFormated;
         params.mode = authorUser.osu.mode;
     }
 
     getOsuPlayer(params).then(user => {
-        if (user == "") return MinakoError.osuUserNotFound(message);
+        if (user == "") return MinakoError.osu.userNotFound(message);
         user = user[0];
 
         const embed = new MessageEmbed()
