@@ -1,4 +1,6 @@
 const { MessageEmbed } = require("discord.js");
+const colors = require("colors")
+console.log("[Command] Command Ping initialized".bgBlue.black)
 
 exports.run = (message, args) => {
     let msgtime1 = message.createdTimestamp;

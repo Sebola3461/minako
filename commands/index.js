@@ -5,6 +5,7 @@ module.exports = {
     commandchannel: require("./guild/CommandChannel"),
     animesearch: require("./anime/Search"),
     animecharacter: require("./anime/CharacterSearch"),
+    activity: require("./activity/Start"),
     setprefix: require("./guild/SetPrefix"),
     osuplayer: require("./osu/Player"),
     osuset: require("./osu/SetConfigs")
