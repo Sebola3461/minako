@@ -1,5 +1,4 @@
 module.exports = {
-    ping: require("./utils/ping"),
     help: require("./utils/help"),
     eval: require("./utils/eval"),
     setprefix: require("./guild/SetPrefix"),

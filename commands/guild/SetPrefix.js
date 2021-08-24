@@ -3,9 +3,9 @@ const { MinakoDatabase } = require("../../db");
 const { MinakoError } = require("../../utils/errors")
 
 exports.run = (message, args) => {
-    if (!message.member.permissions.has("MANAGE_GUILD")) return MinakoError.globalMissingPermissions(message, "MANAGE_GUILD");
+    if (!message.member.permissions.has("MANAGE_GUILD")) return MinakoError.global.missingPermissions(message, "MANAGE_GUILD");
 
-    if (args.length != 2) return MinakoError.setprefixInvalidArguments(message);
+    if (args.length != 2) return MinakoError.global.setprefixInvalidArguments(message);
     let newPrefix = args[1];
     MinakoDatabase.guilds.editGuildRow(message.guild.id, "prefix", newPrefix, message);
     const embed = new MessageEmbed()

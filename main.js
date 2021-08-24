@@ -35,7 +35,7 @@ bot.on("message", (message) => {
     // * ==== Command Handler ====
     let requestedCommand = commands[args[0]]
 
-    if (requestedCommand == undefined) return MinakoError.commandNotFound(message); // * Send a embed if the command doesnt exists.
+    if (requestedCommand == undefined) return MinakoError.globalcommandNotFound(message); // * Send a embed if the command doesnt exists.
 
     requestedCommand.run(message, args, bot);
 })

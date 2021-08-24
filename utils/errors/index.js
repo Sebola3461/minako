@@ -1,3 +1,6 @@
 module.exports = {
-    MinakoError: require("./Error")
+    MinakoError: {
+        osu: require("./OsuErrors"),
+        global: require("./GlobalErrors")
+    }
 }

@@ -4,7 +4,7 @@ const { MinakoError } = require("../../utils/errors");
 const ModesList = require("./rulesets/ModesList.json");
 
 exports.run = (message, args) => {
-    if (args.length == 1) return MinakoError.osuConfigsMissingArguments(message);
+    if (args.length == 1) return MinakoError.osu.configsMissingArguments(message);
 
     let params = {
         username: args[1].replace("_", " "),
