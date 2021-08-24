@@ -5,6 +5,7 @@ exports.run = (message) => {
     const help = new MessageEmbed()
         .setTitle(`Hello ${message.author.username}! Here is my commands list:`)
         .setColor('#D9A0F3')
+        .setThumbnail()
         .setDescription(`Use the prefix \`${prefix}\` before the command name.`)
         .addField("**osu!**", `
         \`osuplayer\` See the stats of a player
@@ -17,6 +18,9 @@ exports.run = (message) => {
         .addField("**Configuration**", `
         \`setprefix\` Set my prefix here
         \`commandchannel\` Select channels my commands can be used
+        `)
+        .addField("**Fun**", `
+        \`activity\` Start a activity in a voice channel!
         `)
         .addField("**Utils**", `
         \`ping\` See my ping!
