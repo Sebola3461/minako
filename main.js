@@ -15,7 +15,7 @@ const bot = new Client();
 
 bot.on('ready', () => {
     console.log(`Ready! Running at: ${bot.user.username} - (${bot.user.id})`.bgGreen.black);
-    bot.user.setActivity("your commands | m+help", {
+    bot.user.setActivity("your commands | m+help/@Minako#6407", {
         type: "LISTENING"
     });
 });
