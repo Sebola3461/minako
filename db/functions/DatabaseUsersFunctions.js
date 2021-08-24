@@ -18,7 +18,8 @@ exports.checkUser = (message) => {
 
 exports.getUser = (id) => {
     this.checkUsersDatabase();
-    let users = require(__dirname + "/../users.json").users;
+    let users = readFileSync(__dirname + "/../users.json", "utf8");
+    users = JSON.parse(users)
     let selectedUser = users[id];
     return selectedUser;
 }

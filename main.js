@@ -23,12 +23,14 @@ bot.on("message", (message) => {
     if (message.content == `<@${bot.user.id}>` || message.content == `<@!${bot.user.id}>`) return others["botping"].send(message); // * Send a help embed if the bot its mentioned.
 
     checkUrl(message)
-    if (!message.content.startsWith(configs.prefix)) return; // ? Now, dont process messages without the prefix
+    MinakoDatabase.guilds.checkGuild(message)
+    if (!message.content.startsWith(MinakoDatabase.guilds.getGuild(message.guild.id).prefix)) return; // ? Now, dont process messages without the prefix
     MinakoDatabase.users.checkUser(message); // * Check if the user exists in the database
-    MinakoDatabase.guilds.checkGuildsDatabase(message)
+    let prefix = MinakoDatabase.guilds.getGuild(message.guild.id).prefix;
+
 
     // ? Add args key to message object
-    let args = message.content.slice(configs.prefix.length).split(" ");
+    let args = message.content.slice(prefix.length).split(" ");
 
     // * ==== Command Handler ====
     let requestedCommand = commands[args[0]]

@@ -1,7 +1,8 @@
-const { MessageEmbed } = require("discord.js")
-const { prefix } = require("../../config/settings.json")
+const { MessageEmbed } = require("discord.js");
+const { MinakoDatabase } = require("../../db");
 
 exports.commandNotFound = (message) => {
+    let prefix = MinakoDatabase.guilds.getGuild(message.guild.id).prefix;
     let embed = new MessageEmbed()
         .setTitle("You need some help?")
         .setColor('#D9A0F3')
@@ -18,6 +19,7 @@ exports.osuUserNotFound = (message) => {
 }
 
 exports.osuPlayerMissingArguments = (message) => {
+    let prefix = MinakoDatabase.guilds.getGuild(message.guild.id).prefix;
     let embed = new MessageEmbed()
         .setTitle("You need some help?")
         .setColor('#D9A0F3')
@@ -28,6 +30,7 @@ exports.osuPlayerMissingArguments = (message) => {
 }
 
 exports.osuConfigsMissingArguments = (message) => {
+    let prefix = MinakoDatabase.guilds.getGuild(message.guild.id).prefix;
     let embed = new MessageEmbed()
         .setTitle("You need some help?")
         .setColor('#D9A0F3')
@@ -38,11 +41,32 @@ exports.osuConfigsMissingArguments = (message) => {
 }
 
 exports.animeMissingArguments = (message) => {
+    let prefix = MinakoDatabase.guilds.getGuild(message.guild.id).prefix;
     let embed = new MessageEmbed()
         .setTitle("You need some help?")
         .setColor('#D9A0F3')
         .setDescription("Incorrect syntax! If you need help, see below how to use this command.")
         .addField("**Syntax**", `${prefix}anime \`Anime name\``)
         .addField("**Example**", `${prefix}anime \`touhou\``)
+    message.channel.send(embed)
+}
+
+exports.globalMissingPermissions = (message, permission) => {
+    let embed = new MessageEmbed()
+        .setTitle("Wait a second... You cant execute this command!")
+        .setColor('#D9A0F3')
+        .setDescription(`Sorry, this command can only be executed by members with the \`${permission}\` permission.`)
+    message.channel.send(embed)
+}
+
+exports.setprefixInvalidArguments = (message) => {
+    let prefix = MinakoDatabase.guilds.getGuild(message.guild.id).prefix;
+    let embed = new MessageEmbed()
+        .setTitle("You need some help?")
+        .setColor('#D9A0F3')
+        .setDescription("Incorrect syntax! If you need help, see below how to use this command.")
+        .addField("**Syntax**", `${prefix}setprefix \`newPrefix\``)
+        .addField("**Example**", `${prefix}setprefix \`m!\``)
+        .addField("**Limitations**", `The new prefix cannot contain spaces`)
     message.channel.send(embed)
 }
