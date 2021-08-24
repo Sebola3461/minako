@@ -1,3 +1,4 @@
 module.exports = {
-    botping: require("./botPing")
+    botping: require("./botPing"),
+    checkCommandchannel: require("./CheckCommandChannel")
 }

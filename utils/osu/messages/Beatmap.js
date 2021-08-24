@@ -34,8 +34,8 @@ exports.sendOsuBeatmapEmbed = (map, mode, message) => {
             \`OD\`: ${map[i].diff_overall} ● \`HP\`: ${map[i].diff_drain} ● \`AR\`: ${map[i].diff_approach} ● \`Max Combo\`: ${map[i].max_combo}x\n
             `)
         }
+        embed.attachFiles(new MessageAttachment(body, "Beatmap_Preview.mp3"))
         message.channel.send(embed)
-        message.channel.send(new MessageAttachment(body, "Beatmap_Preview.mp3"))
     })
 }
 
