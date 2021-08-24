@@ -13,6 +13,6 @@ exports.run = (message, args) => {
                     ":purple_heart: :ping_pong: Pong! bot's ping is `" + ping + 'ms`.'
                 );
             msg.channel.send(embed);
-            // message.delete();
+            msg.delete();
         });
 }
