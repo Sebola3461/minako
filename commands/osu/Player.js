@@ -47,6 +47,7 @@ exports.run = (message, args) => {
 
         const embed = new MessageEmbed()
             .setColor('#D9A0F3')
+            .setURL(`https://osu.ppy.sh/users/${user.user_id}`)
             .setTitle(`osu!${params.modeFormated} stats for ${user.username}`)
             .setDescription(`#${user.pp_rank} (:flag_${user.country.toLowerCase()}: #${user.pp_country_rank})`)
             .setThumbnail(`https://a.ppy.sh/${user.user_id}`)
@@ -57,6 +58,7 @@ exports.run = (message, args) => {
             \`Total Score\`: ${formatNumber(user.total_score)}
             \`Level\`: ${new Number(user.level).toFixed(0)}
             `)
+            .addField("**Ranks**", `<:rankingXH:878812714598797382> \`${user.count_rank_ssh}\` <:rankingX:878812714741403719> \`${user.count_rank_ss}\`  <:rankingSH:878812714758205490> \`${user.count_rank_sh}\` <:rankingS:878812714896592976> \`${user.count_rank_s}\` <:rankingA:878812714552668241> \`${user.count_rank_a}\``)
         message.channel.send(embed)
     })
 }
