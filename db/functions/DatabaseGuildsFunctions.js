@@ -57,6 +57,10 @@ exports.appendNewGuild = (message) => {
             "channel": "",
             "message:": ""
         },
+        "bye": {
+            "channel": "",
+            "message:": ""
+        },
         "osu": {
             "enable_links": true
         }

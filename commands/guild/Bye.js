@@ -15,10 +15,10 @@ exports.run = async(message, args) => {
     args.splice(0, 1)
 
     // * Check args size 
-    if (args.length < 1) return MinakoError.global.commandInvalidArguments(message, "welcome `(set/remove)`", "`#channel message/embed_object`", "`#channel {user} Hello! Welcome to {guild}`", "`set` Configure channel and message.\n`remove` Disable system.", "You can use placeholders! See bellow the avaliable placeholders for this command.\n`{user}`: Mention the member\n`{guild}` Show server name\n{name} Show member username.");
+    if (args.length < 1) return MinakoError.global.commandInvalidArguments(message, "bye `(set/remove)`", "`#channel message/embed_object`", "`#channel {username} Bye!`", "`set` Configure channel and message.\n`remove` Disable system.", "You can use placeholders! See bellow the avaliable placeholders for this command.\n`{guild}` Show server name\n{name} Show member username.");
 
     // * Check first arg content
-    if (args.length < 2 && !["remove", "set"].includes(args[0])) return MinakoError.global.commandInvalidArguments(message, "welcome `(set/remove)`", "`#channel message/embed_object`", "`#channel {user} Hello! Welcome to {guild}`", "`set` Configure channel and message.\n`remove` Disable system.", "You can use placeholders! See bellow the avaliable placeholders for this command.\n`{user}`: Mention the member\n`{guild}` Show server name\n{name} Show member username.");
+    if (args.length < 2 && !["remove", "set"].includes(args[0])) return MinakoError.global.commandInvalidArguments(message, "bye `(set/remove)`", "`#channel message/embed_object`", "`#channel {username} Bye!`", "`set` Configure channel and message.\n`remove` Disable system.", "You can use placeholders! See bellow the avaliable placeholders for this command.\n`{guild}` Show server name\n{name} Show member username.");
 
     // * Check channel mention & channel type
     if (message.mentions.channels.size == 0 && args[0] != "remove") {
@@ -36,7 +36,7 @@ exports.run = async(message, args) => {
         // * Remove "set" from args
         args.splice(0, 1)
 
-        if (args.length == 1) return MinakoError.global.commandInvalidArguments(message, "welcome `(set/remove)`", "`#channel message/embed_object`", "`#channel {user} Hello! Welcome to {guild}`", "`set` Configure channel and message.\n`remove` Disable system.", "You can use placeholders! See bellow the avaliable placeholders for this command.\n`{user}`: Mention the member\n`{guild}` Show server name\n{name} Show member username.");
+        if (args.length == 1) return MinakoError.global.commandInvalidArguments(message, "bye `(set/remove)`", "`#channel message/embed_object`", "`#channel {username} Bye!`", "`set` Configure channel and message.\n`remove` Disable system.", "You can use placeholders! See bellow the avaliable placeholders for this command.\n`{guild}` Show server name\n{name} Show member username.");
 
         // * Params object
         let params = {
@@ -48,7 +48,7 @@ exports.run = async(message, args) => {
         let currentSettings = MinakoDatabase.guilds.getGuild(message.guild.id);
 
         // * Check channel
-        let checkingChannel = currentSettings["welcome"]["channel"]; // ? get channel object
+        let checkingChannel = currentSettings["bye"]["channel"]; // ? get channel object
         if (checkingChannel == message.mentions.channels.first().id) return MinakoError.welcome.duplicatedChannel(message);
 
         // * Set data
@@ -57,7 +57,7 @@ exports.run = async(message, args) => {
         params.message = args.join(" ").trimStart().trimEnd()
 
         // * Update configuration
-        MinakoDatabase.guilds.editGuildRow(message.guild.id, "welcome", params, message);
+        MinakoDatabase.guilds.editGuildRow(message.guild.id, "bye", params, message);
 
         const embed = new MessageEmbed()
             .setTitle("Sucess!")
@@ -72,7 +72,7 @@ exports.run = async(message, args) => {
 
             const filter = (reaction, user) => reaction.emoji.name == '☑' && user.id == message.author.id;
             const collector = m.createReactionCollector(filter, { time: 15000 });
-            collector.on('collect', () => testWelcome(m.guild.id, message, "welcome"));
+            collector.on('collect', () => testWelcome(m.guild.id, message, "bye"));
         })
     }
 
@@ -85,7 +85,7 @@ exports.run = async(message, args) => {
         }
 
         // * Update configuration
-        MinakoDatabase.guilds.editGuildRow(message.guild.id, "welcome", params, message);
+        MinakoDatabase.guilds.editGuildRow(message.guild.id, "bye", params, message);
 
         const embed = new MessageEmbed()
             .setTitle("Sucess!")
