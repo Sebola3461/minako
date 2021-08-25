@@ -3,7 +3,7 @@ const configs = require("./../../config/settings.json")
 const colors = require("colors")
 
 exports.checkGuildsDatabase = (guildID) => {
-    if (!existsSync(__dirname + "/../guilds.json") == true) return;
+    if (existsSync(__dirname + "/../guilds.json") == false) return;
     this.checkGuild(guildID)
 
     let db = { guilds: {} }
@@ -13,7 +13,8 @@ exports.checkGuildsDatabase = (guildID) => {
 
 exports.checkGuild = (message) => {
     this.checkGuildsDatabase(message.guild.id);
-    let guild = require(__dirname + "/../guilds.json").guilds;
+    let guild = readFileSync(__dirname + "/../guilds.json", "utf8");
+    guild = guilds.guilds
     let selectedGuild = guild[message.guild.id];
     if (selectedGuild == undefined) return this.appendNewGuild(message);
 }
