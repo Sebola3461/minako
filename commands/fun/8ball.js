@@ -13,6 +13,5 @@ exports.run = (message, args) => {
     chance = new String(chance)
     chance = chance[0];
     chance = new Number(chance).valueOf()
-    console.log(chance)
     message.channel.send(replies[chance])
 }
