@@ -2,6 +2,10 @@ const { MinakoDatabase } = require("../../db");
 const { parseMessage } = require("../Placeholders/PlaceholderManager");
 
 exports.analyseMessage = (message) => {
+    if (message.author.permission.has("MANAGE_MESSAGES")) return {
+        code: 200
+    };
+
     let messageArgs = message.content.split(" ")
     let moderationSettings = MinakoDatabase.guilds.getGuild(message.guild.id)
     moderationSettings = moderationSettings["moderation"]
