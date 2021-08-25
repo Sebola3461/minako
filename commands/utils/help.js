@@ -21,6 +21,7 @@ exports.run = (message) => {
         `)
         .addField("**Fun**", `
         \`activity\` Start a activity in a voice channel!
+        \`8ball\ Make a question, ill answer!
         `)
         .addField("**Utils**", `
         \`ping\` See my ping!
