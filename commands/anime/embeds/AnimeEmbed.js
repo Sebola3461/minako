@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js")
 
 exports.sendAnimeEmbed = (anime, message) => {
     if (anime.source == null) anime.source = "No data.";
+    if (anime.synopsis == null) anime.synopsis = "No data about this anime."
 
     const animeEmbed = new MessageEmbed()
         .setTitle(anime.titles.romaji)

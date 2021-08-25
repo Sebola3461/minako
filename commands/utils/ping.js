@@ -1,6 +1,5 @@
 const { MessageEmbed } = require("discord.js");
 const colors = require("colors")
-console.log("[Command] Command Ping initialized".bgBlue.black)
 
 exports.run = (message, args) => {
     let msgtime1 = message.createdTimestamp;
@@ -14,6 +13,6 @@ exports.run = (message, args) => {
                     ":purple_heart: :ping_pong: Pong! bot's ping is `" + ping + 'ms`.'
                 );
             msg.channel.send(embed);
-            message.delete();
+            msg.delete();
         });
 }

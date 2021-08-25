@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js")
 
 exports.sendCharacterEmbed = (character, message) => {
     if (character.source == null) character.source = "No data.";
+    if (character.source == null) character.description = "No data about this character.";
 
     const characterEmbed = new MessageEmbed()
         .setTitle(character.names.canonical)
