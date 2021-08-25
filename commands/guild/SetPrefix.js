@@ -5,8 +5,10 @@ const { MinakoError } = require("../../utils/errors")
 exports.run = async(message, args) => {
     if (!message.member.permissions.has("MANAGE_GUILD")) return MinakoError.global.missingPermissions(message, "MANAGE_GUILD");
 
-    if (args.length != 2) return MinakoError.global.commandInvalidArguments(message, "setprefix", "`newPrefix`", "m!", "The new prefix can't have whitespaces.");
-    let newPrefix = args[1];
+    if (args.length != 2) return MinakoError.global.commandInvalidArguments(message, "setprefix", "`newPrefix`", "m!");
+
+    args.splice(0, 1)
+    let newPrefix = args.join(" ");
     MinakoDatabase.guilds.editGuildRow(message.guild.id, "prefix", newPrefix, message);
     const embed = new MessageEmbed()
         .setTitle("Sucess!")
