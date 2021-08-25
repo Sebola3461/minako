@@ -7,7 +7,7 @@ exports.run = (message, args) => {
 
     console.log(args)
     if (args.length == 1) return MinakoError.global.commandInvalidArguments(message, "bannedwords `(add/remove/removeall/list/setmessage)`", "`word1 word2 word3`", "`banana pagayo keyboard`", "`add` Add a word (or more) to system.\n`remove` Remove a word (or more) to system.\n`list` See a list of banned words (Dont't need args)\n`setmessage` Set alert the message.");
-    //if (!["list", "removeall", "setmessage"].includes(args[0])) return MinakoError.global.commandInvalidArguments(message, "bannedwords `(add/remove/removeall/list/setmessage)`", "`word1 word2 word3`", "`banana pagayo keyboard`", "`add` Add a word (or more) to system.\n`remove` Remove a word (or more) to system.\n`removeall` Remove all words to the system. (Dont't need args)\n`list` See a list of banned words (Dont't need args)\n`setmessage` Set alert the message.");
+    if (!["list", "removeall", "setmessage", "add", "remove", ].includes(args[0])) return MinakoError.global.commandInvalidArguments(message, "bannedwords `(add/remove/removeall/list/setmessage)`", "`word1 word2 word3`", "`banana pagayo keyboard`", "`add` Add a word (or more) to system.\n`remove` Remove a word (or more) to system.\n`removeall` Remove all words to the system. (Dont't need args)\n`list` See a list of banned words (Dont't need args)\n`setmessage` Set alert the message.");
     if (args[0].toLowerCase() == "add") {
         args.splice(0, 1)
         let currentSettings = MinakoDatabase.guilds.getGuild(message.guild.id);
