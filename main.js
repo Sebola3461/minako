@@ -22,6 +22,7 @@ bot.on('ready', () => {
 });
 
 bot.on("message", (message) => {
+    if (message.channel.type == "dm") return;
     if (message.author.bot) return; // ? Dont reply bot users
     if (message.content == `<@${bot.user.id}>` || message.content == `<@!${bot.user.id}>`) return others["botping"].send(message); // * Send a help embed if the bot its mentioned.
 
