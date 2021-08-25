@@ -6,7 +6,8 @@ exports.run = (message, args) => {
     // Youtube / Poker / Chees / 
     let activityIDs = ["755600276941176913", "755827207812677713", "832012774040141894"]
 
-    if (args.length < 3 && message.mentions.channels.size < 1) return MinakoError.global.commandInvalidArguments(message, "activity", "`activity-name` `#!channel`", "`activity` `youtube` `#!voice1`", "Avaliable activities:\n`youtube` Watch youtube with your friends!\n`chees` Chees with your friends!\n`poker` Play poker with your friends!");
+    if (args.length < 3) return MinakoError.global.commandInvalidArguments(message, "activity", "`activity-name` `#!channel`", "`activity` `youtube` `#!voice1`", "Avaliable activities:\n`youtube` Watch youtube with your friends!\n`chees` Chees with your friends!\n`poker` Play poker with your friends!");
+    if (message.mentions.channels.size < 1) return MinakoError.global.commandInvalidArguments(message, "activity", "`activity-name` `#!channel`", "`activity` `youtube` `#!voice1`", "Avaliable activities:\n`youtube` Watch youtube with your friends!\n`chees` Chees with your friends!\n`poker` Play poker with your friends!");
 
     if (message.mentions.channels.first().type != "voice") return MinakoError.activity.incorrectChannelType(message);
 
