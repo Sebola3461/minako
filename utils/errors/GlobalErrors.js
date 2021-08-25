@@ -18,6 +18,16 @@ exports.missingPermissions = (message, permission) => {
     message.channel.send(embed)
 }
 
+exports.commandExecError = (message, e) => {
+    e = JSON.stringify(e.message)
+    let embed = new MessageEmbed()
+        .setTitle("Oh no!")
+        .setColor('#D9A0F3')
+        .setDescription(`An error has ocurred when execute this command. Sorry...`)
+        .addField("**Error message**", `\`${e}\``)
+    message.channel.send(embed)
+}
+
 exports.commandInvalidArguments = (message, command, syntax, example, limitation) => {
     let prefix = MinakoDatabase.guilds.getGuild(message.guild.id).prefix;
     let embed = new MessageEmbed()

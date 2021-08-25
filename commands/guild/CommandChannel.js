@@ -3,7 +3,7 @@ const { MinakoDatabase } = require("../../db");
 const { MinakoError } = require("../../utils/errors")
 const { addCommandChannel, removeCommandChannel, returnCommandChannels } = require("./functions/CommandChannel")
 
-exports.run = (message, args) => {
+exports.run = async(message, args) => {
     if (args.length < 3 && args[1] != "list") return MinakoError.commandChannel.invalidArgs(message, "commandchannel", "`(add/remove/list)` `#channel-to-allow-command`", "`add` `#commands`");
 
     if ((!args[1] == "add" || !args[1] == "remove") == true) return MinakoError.commandChannel.invalidArgs(message, "commandchannel", "`(add/remove)` `#channel-to-allow-command`", "`add` `#commands`", "`list` option don't need a mentioned channel");

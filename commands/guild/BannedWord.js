@@ -2,10 +2,10 @@ const { MessageEmbed } = require("discord.js");
 const { MinakoDatabase } = require("../../db");
 const { MinakoError } = require("../../utils/errors");
 
-exports.run = (message, args) => {
+exports.run = async(message, args) => {
     if (!message.member.permissions.has("MANAGE_GUILD")) return MinakoError.global.missingPermissions(message, "MANAGE_GUILD");
 
-    console.log(args)
+    args.splice(0, 1)
     if (args.length == 1) return MinakoError.global.commandInvalidArguments(message, "bannedwords `(add/remove/removeall/list/setmessage)`", "`word1 word2 word3`", "`banana pagayo keyboard`", "`add` Add a word (or more) to system.\n`remove` Remove a word (or more) to system.\n`list` See a list of banned words (Dont't need args)\n`setmessage` Set alert the message.");
     if (!["list", "removeall", "setmessage", "add", "remove", ].includes(args[0])) return MinakoError.global.commandInvalidArguments(message, "bannedwords `(add/remove/removeall/list/setmessage)`", "`word1 word2 word3`", "`banana pagayo keyboard`", "`add` Add a word (or more) to system.\n`remove` Remove a word (or more) to system.\n`removeall` Remove all words to the system. (Dont't need args)\n`list` See a list of banned words (Dont't need args)\n`setmessage` Set alert the message.");
     if (args[0].toLowerCase() == "add") {

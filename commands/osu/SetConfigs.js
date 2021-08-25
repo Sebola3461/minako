@@ -3,7 +3,7 @@ const { MinakoDatabase } = require("../../db");
 const { MinakoError } = require("../../utils/errors");
 const ModesList = require("./rulesets/ModesList.json");
 
-exports.run = (message, args) => {
+exports.run = async(message, args) => {
     if (args.length == 1) return MinakoError.osu.configsMissingArguments(message);
 
     let params = {

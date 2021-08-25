@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js")
 const { prefix } = require("./../../config/settings.json")
 
-exports.run = (message) => {
+exports.run = async(message) => {
     const help = new MessageEmbed()
         .setTitle(`Hello ${message.author.username}! Here is my commands list:`)
         .setColor('#D9A0F3')

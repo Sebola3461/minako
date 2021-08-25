@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js")
 const { MinakoError } = require("../../utils/errors")
 const { fetchActivity } = require("./functions/FetchActivity")
 
-exports.run = (message, args) => {
+exports.run = async(message, args) => {
     // Youtube / Poker / Chees / 
     let activityIDs = ["755600276941176913", "755827207812677713", "832012774040141894"]
 
