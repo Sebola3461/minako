@@ -1,5 +1,5 @@
 const { fetchOsuPlayer, fetchMapDiff } = require("./functions/FetchData")
-const ModesList = require("./../../commands/osu/rulesets/ModesList.json")
+const ModesList = require("../../commands/osu/rulesets/ModesList.json")
 
 
 // https://osu.ppy.sh/beatmapsets/1394539#taiko/2907358
