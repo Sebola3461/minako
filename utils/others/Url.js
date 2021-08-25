@@ -2,7 +2,7 @@
  * @param {String} message_content 
  */
 
-const { MinakoUtils } = require("../osu");
+const { MinakoUtils } = require("..");
 
 exports.checkUrl = (message) => {
     if (!message.content.includes("https://")) return;

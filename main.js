@@ -11,6 +11,7 @@ const { MinakoError } = require('./utils/errors');
 const { MinakoDatabase } = require('./db');
 const { checkUrl } = require('./utils/others/Url');
 const { checkCommandchannel } = require('./utils/others');
+const { MinakoUtils } = require('./utils');
 const bot = new Client();
 
 bot.on('ready', () => {
@@ -26,21 +27,24 @@ bot.on("message", (message) => {
 
     checkUrl(message)
     MinakoDatabase.guilds.checkGuild(message)
-    if (!message.content.startsWith(MinakoDatabase.guilds.getGuild(message.guild.id).prefix)) return; // ? Now, dont process messages without the prefix
-    MinakoDatabase.users.checkUser(message); // * Check if the user exists in the database
+
     let prefix = MinakoDatabase.guilds.getGuild(message.guild.id).prefix;
+    let args = message.content.slice(prefix.length).split(" ");
+    let modWords = MinakoUtils.bannedwords.analyseMessage(message);
+    if (modWords.code != 200) return;
+
+    if (!message.content.startsWith(prefix)) return; // ? Now, dont process messages without the prefix
+    MinakoDatabase.users.checkUser(message); // * Check if the user exists in the database
 
     let commandChannel = checkCommandchannel.channel(message);
     if (commandChannel.code == 400) return message.channel.send(commandChannel.message);
-
-    // ? Add args key to message object
-    let args = message.content.slice(prefix.length).split(" ");
 
     // * ==== Command Handler ====
     let requestedCommand = commands[args[0]]
 
     if (requestedCommand == undefined) return MinakoError.global.commandNotFound(message); // * Send a embed if the command doesnt exists.
 
+    args.splice(0, 1)
     requestedCommand.run(message, args, bot);
 })
 

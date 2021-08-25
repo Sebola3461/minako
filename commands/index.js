@@ -8,6 +8,7 @@ module.exports = {
     activity: require("./activity/Start"),
     "8ball": require("./fun/8ball.js"),
     setprefix: require("./guild/SetPrefix"),
+    bannedwords: require("./guild/BannedWord"),
     osuplayer: require("./osu/Player"),
     osuset: require("./osu/SetConfigs")
 }
