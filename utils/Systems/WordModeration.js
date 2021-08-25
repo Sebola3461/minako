@@ -22,7 +22,7 @@ exports.analyseMessage = (message) => {
     }
 
     if (checkPass == 0) return;
-    let modMessage = parseMessage(moderationSettings["banned_word_message"], message);
+    let modMessage = parseMessage(moderationSettings["banned_word_message"], message.member);
     message.delete()
     message.channel.send(modMessage)
     return {

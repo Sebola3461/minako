@@ -1,4 +1,4 @@
 exports.parseMessage = (message, message_object) => {
-    message = message.replaceAll("{user}", `${message_object.author}`).replaceAll("{channel}", `${message_object.channel}`)
+    message = message.replaceAll("{user}", `${message_object}`).replaceAll("{channel}", `${message_object.channel}`).replaceAll("{username}", `${message_object.username}`).replaceAll("{guild}", `${message_object.guild.name}`)
     return message;
 }
