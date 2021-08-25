@@ -15,23 +15,28 @@ exports.run = async(message, args) => {
     args.splice(0, 1)
 
     // * Check args size 
-    if (args.length < 3) return MinakoError.global.commandInvalidArguments(message, "welcome `(set/remove)`", "`#channel message/embed_object`", "`#channel {user} Hello! Welcome to {guild}`", "`set` Configure channel and message.\n`remove` Disable system.", "You can use placeholders! See bellow the avaliable placeholders for this command.\n`{user}`: Mention the member\n`{guild}` Show server name\n{name} Show member username.");
+    if (args.length < 1) return MinakoError.global.commandInvalidArguments(message, "welcome `(set/remove)`", "`#channel message/embed_object`", "`#channel {user} Hello! Welcome to {guild}`", "`set` Configure channel and message.\n`remove` Disable system.", "You can use placeholders! See bellow the avaliable placeholders for this command.\n`{user}`: Mention the member\n`{guild}` Show server name\n{name} Show member username.");
 
     // * Check first arg content
-    if (!["set", "remove"].includes(args[0])) return MinakoError.global.commandInvalidArguments(message, "welcome `(set/remove)`", "`#channel message/embed_object`", "`#channel {user} Hello! Welcome to {guild}`", "`set` Configure channel and message.\n`remove` Disable system.", "You can use placeholders! See bellow the avaliable placeholders for this command.\n`{user}`: Mention the member\n`{guild}` Show server name\n{name} Show member username.");
+    if (args.length < 2 && !["remove", "set"].includes(args[0])) return MinakoError.global.commandInvalidArguments(message, "welcome `(set/remove)`", "`#channel message/embed_object`", "`#channel {user} Hello! Welcome to {guild}`", "`set` Configure channel and message.\n`remove` Disable system.", "You can use placeholders! See bellow the avaliable placeholders for this command.\n`{user}`: Mention the member\n`{guild}` Show server name\n{name} Show member username.");
 
-    // * Check mentions
-    if (message.mentions.channels.size != 1) return MinakoError.welcome.invalidMention(message);
-
-    // * Check channel mention type
-    if (message.mentions.channels.first().type != "text") return MinakoError.welcome.invalidMention(message);
+    // * Check channel mention & channel type
+    if (message.mentions.channels.size == 0 && args[0] != "remove") {
+        return MinakoError.welcome.invalidMention(message);
+    }
 
     // * * ========================== Subcommands ========================== * * //
 
     if (args[0].toLowerCase() == "set") {
 
+        if (message.mentions.channels.first().type != "text") {
+            return MinakoError.welcome.invalidMention(message);
+        }
+
         // * Remove "set" from args
         args.splice(0, 1)
+
+        if (args.length == 1) return MinakoError.global.commandInvalidArguments(message, "welcome `(set/remove)`", "`#channel message/embed_object`", "`#channel {user} Hello! Welcome to {guild}`", "`set` Configure channel and message.\n`remove` Disable system.", "You can use placeholders! See bellow the avaliable placeholders for this command.\n`{user}`: Mention the member\n`{guild}` Show server name\n{name} Show member username.");
 
         // * Params object
         let params = {
