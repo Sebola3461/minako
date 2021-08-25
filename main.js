@@ -27,7 +27,6 @@ bot.on("message", (message) => {
 
     checkUrl(message)
     MinakoDatabase.guilds.checkGuild(message)
-    checkDatabasesUpdates(message)
 
     let prefix = MinakoDatabase.guilds.getGuild(message.guild.id).prefix;
     let args = message.content.slice(prefix.length).split(" ");
@@ -52,8 +51,8 @@ bot.on("message", (message) => {
     }
 })
 
-function checkDatabasesUpdates(message) {
-    MinakoDatabase.guilds.updateGuildSyntax(message.guild.id, "welcome", { channel: "", message: "" })
-}
+bot.on("guildMemberAdd", (member) => {
+    MinakoUtils.welcomer.sendWelcome(member)
+})
 
 bot.login(configs.discord_token);
