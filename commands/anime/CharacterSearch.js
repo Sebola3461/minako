@@ -28,12 +28,13 @@ exports.run = (message, args) => {
         }
 
         const filter = (m) => m.content;
-        const collector = new MessageCollector(message.channel, filter, { time: 50000 });
+        const collector = new MessageCollector(message.channel, filter, { time: 50000, max: 1 });
 
         collector.on('collect', m => {
             if (!filterArgs.includes(m.content)) return;
             const index = new Number(m.content);
-            fetchCharacter(result[index - 1].id).then(character => {
+            console.log(m)
+            return fetchCharacter(result[index - 1].id).then(character => {
                 sendCharacterEmbed(character, message)
             })
         });

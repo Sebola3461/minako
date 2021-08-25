@@ -3,7 +3,7 @@
  * * The brain of the bot
  */
 
-const { Client } = require('discord.js');
+const { Client, fetchUser } = require('discord.js');
 const configs = require('./config/settings.json');
 const commands = require("./commands");
 const others = require("./utils/others");

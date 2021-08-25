@@ -2,9 +2,9 @@ const { writeFileSync, readFileSync, existsSync } = require("fs")
 const configs = require("./../../config/settings.json")
 const colors = require("colors")
 
-exports.checkGuildsDatabase = (guildID) => {
-    if (existsSync(__dirname + "/../guilds.json") == true) return;
-    this.checkGuild(guildID)
+exports.checkGuildsDatabase = () => {
+    if (existsSync(__dirname + "/../guilds.json")) return;
+    //this.checkGuild(guildID)
 
     let db = { guilds: {} }
     writeFileSync(__dirname + "/../guilds.json", JSON.stringify(db), "utf8")
@@ -12,8 +12,9 @@ exports.checkGuildsDatabase = (guildID) => {
 }
 
 exports.checkGuild = (message) => {
-    this.checkGuildsDatabase(message.guild.id);
-    let guild = require(__dirname + "/../guilds.json").guilds;
+    this.checkGuildsDatabase();
+    let guild = readFileSync(__dirname + "/../guilds.json", "utf8");
+    guild = JSON.parse(guild).guilds;
     let selectedGuild = guild[message.guild.id];
     if (selectedGuild == undefined) return this.appendNewGuild(message);
 }
