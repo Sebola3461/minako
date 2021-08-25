@@ -3,7 +3,7 @@ const configs = require("./../../config/settings.json")
 const colors = require("colors")
 
 exports.checkGuildsDatabase = (guildID) => {
-    if (existsSync(__dirname + "/../guilds.json") == true) return;
+    if (!existsSync(__dirname + "/../guilds.json") == true) return;
     this.checkGuild(guildID)
 
     let db = { guilds: {} }
