@@ -2,7 +2,7 @@ const { MinakoDatabase } = require("../../db");
 const { parseMessage } = require("../Placeholders/PlaceholderManager");
 
 exports.analyseMessage = (message) => {
-    if (message.author.permissions.has("MANAGE_MESSAGES", "MANAGE_GUILD", "ADMIN", "MANAGE_CHANNELS")) return {
+    if (message.member.permissions.has("MANAGE_MESSAGES", "MANAGE_GUILD", "ADMIN", "MANAGE_CHANNELS")) return {
         code: 200
     };
 
