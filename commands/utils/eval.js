@@ -7,7 +7,7 @@ const { MinakoDatabase } = require("../../db");
 const { MinakoError } = require("../../utils/errors");
 let devs = ["556639598172962818", "215330105411633154"]
 
-exports.run = (message, args, bot) => {
+exports.run = async(message, args, bot) => {
     args = args.join(" ").slice(args[0].length + 1) // * Remove the command name of the string
     if (args == "") return;
     if (!devs.includes(message.author.id)) return;

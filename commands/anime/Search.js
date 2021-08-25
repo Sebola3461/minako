@@ -3,7 +3,7 @@ const { MinakoError } = require("../../utils/errors");
 const { sendAnimeEmbed } = require("./embeds/AnimeEmbed");
 const { searchAnime, fetchAnime } = require("./functions/FetchAnime");
 
-exports.run = (message, args) => {
+exports.run = async(message, args) => {
     if (args.length == 1) return MinakoError.global.commandInvalidArguments(message, "animesearch", "`anime name`", "`Touhou`");
 
     args.splice(0, 1);

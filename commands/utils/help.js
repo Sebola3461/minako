@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js")
 const { prefix } = require("./../../config/settings.json")
 
-exports.run = (message) => {
+exports.run = async(message) => {
     const help = new MessageEmbed()
         .setTitle(`Hello ${message.author.username}! Here is my commands list:`)
         .setColor('#D9A0F3')
@@ -21,7 +21,7 @@ exports.run = (message) => {
         `)
         .addField("**Fun**", `
         \`activity\` Start a activity in a voice channel!
-        \`8ball\ Make a question, ill answer!
+        \`8ball\` Make a question, ill answer!
         `)
         .addField("**Utils**", `
         \`ping\` See my ping!

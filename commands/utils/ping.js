@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const colors = require("colors")
 
-exports.run = (message, args) => {
+exports.run = async(message, args) => {
     let msgtime1 = message.createdTimestamp;
     message.channel.send(':purple_heart: :ping_pong: Pinging...')
         .then((msg) => {

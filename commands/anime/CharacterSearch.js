@@ -3,7 +3,7 @@ const { MinakoError } = require("../../utils/errors");
 const { sendCharacterEmbed } = require("./embeds/CharacterEmbed");
 const { searchCharacter, fetchCharacter } = require("./functions/FetchAnime");
 
-exports.run = (message, args) => {
+exports.run = async(message, args) => {
     if (args.length == 1) return MinakoError.global.commandInvalidArguments(message, "animecharacter", "`Character Name`", "`Reimu Hakurei`");
 
 

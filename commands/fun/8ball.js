@@ -1,7 +1,10 @@
-exports.run = (message, args) => {
+const { MinakoError } = require("../../utils/errors");
+
+exports.run = async(message, args) => {
     let chance = 0;
     let replies = ["No.", "Probably no.", "Maybe no.", "Maybe yes...", "Follow your heart...", "Luck is on your side, probably yes!", "Perhaps, I can look at it.", "Absolutely yes.", "Sure why not? This is a fact."]
 
+    if (args.length == 1) return MinakoError.global.commandInvalidArguments(message, "8ball", "`question`", "`I'll win my next match?`");
     args.splice(0, 1)
 
     if (args.includes("money") | args.includes("gay") | args.includes("waifu") | args.includes("i")) chance = 5.25;
