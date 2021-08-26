@@ -1,6 +1,6 @@
 const { MessageEmbed, MessageCollector } = require("discord.js");
 const { MinakoDatabase } = require("../../db");
-const { MinakoError } = require("../../utils/errors");
+const { MinakoError } = require("../../utils/Errors");
 const { testWelcome } = require("./functions/TestWelcome");
 
 // * ==================================== Welcome System ==================================== * //
