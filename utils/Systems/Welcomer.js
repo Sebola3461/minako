@@ -9,3 +9,12 @@ exports.sendWelcome = (member) => {
     if (welcome["channel"] == "") return;
     member.guild.channels.cache.get(welcome["channel"]).send(welcomeMessage)
 }
+
+exports.sendBye = (member) => {
+    let bye = MinakoDatabase.guilds.getGuild(member.guild.id)["bye"];
+    let byeMessage = bye["message"];
+    byeMessage = parseMessage(byeMessage, member);
+
+    if (bye["channel"] == "") return;
+    member.guild.channels.cache.get(bye["channel"]).send(byeMessage)
+}

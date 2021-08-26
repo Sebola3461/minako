@@ -56,4 +56,8 @@ bot.on("guildMemberAdd", (member) => {
     MinakoUtils.welcomer.sendWelcome(member)
 })
 
+bot.on("guildMemberRemove", (member) => {
+    MinakoUtils.welcomer.sendBye(member)
+})
+
 bot.login(configs.discord_token);
