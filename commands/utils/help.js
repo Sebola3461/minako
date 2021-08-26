@@ -1,11 +1,11 @@
 const { MessageEmbed } = require("discord.js")
 const { prefix } = require("./../../config/settings.json")
 
-exports.run = async(message) => {
+exports.run = async(message, args, bot) => {
     const help = new MessageEmbed()
         .setTitle(`Hello ${message.author.username}! Here is my commands list:`)
         .setColor('#D9A0F3')
-        .setThumbnail("https://cdn.discordapp.com/avatars/694553618397003799/0eba1c26a5f9899de958d87402fbc615.png")
+        .setThumbnail(bot.user.avatarURL())
         .setDescription(`Use the prefix \`${prefix}\` before the command name.`)
         .addField("**osu!**", `
         \`osuplayer\` See the stats of a player
