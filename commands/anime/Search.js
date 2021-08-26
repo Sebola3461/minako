@@ -19,6 +19,7 @@ exports.run = async(message, args) => {
         const embed = new MessageEmbed()
             .setTitle("Anime search results for " + `"${args.join(" ")}"`)
             .setDescription("Type the number to select the anime\n\n")
+            .setFooter("You have 10s to select")
             .setColor('#D9A0F3');
 
         for (let i = 0; i < resultSize; i++) {
@@ -27,7 +28,7 @@ exports.run = async(message, args) => {
         }
 
         const filter = (m) => m.content;
-        const collector = new MessageCollector(message.channel, filter, { time: 50000, max: 1 });
+        const collector = new MessageCollector(message.channel, filter, { time: 10000, max: 1 });
 
         let collected = false;
         collector.on('collect', m => {
