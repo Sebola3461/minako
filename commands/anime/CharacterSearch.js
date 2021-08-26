@@ -41,7 +41,7 @@ exports.run = async(message, args) => {
             })
         }).on("end", () => {
             if (collected == true) return;
-            message.channel.send(`${message.author} You kept me waiting too long. This is not polite at all! Run the command again to use it.`)
+            message.channel.send(`${message.author} | You kept me waiting too long. This is not polite at all! Run the command again to use it.`)
         })
 
         message.channel.send(embed)
