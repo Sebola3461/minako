@@ -29,13 +29,18 @@ exports.run = async(message, args) => {
         const filter = (m) => m.content;
         const collector = new MessageCollector(message.channel, filter, { time: 50000, max: 1 });
 
+        let collected = false;
         collector.on('collect', m => {
             if (!filterArgs.includes(m.content)) return;
+            collected = true;
             const index = new Number(m.content);
             fetchAnime(result[index - 1].id).then(anime => {
                 return sendAnimeEmbed(anime, message);
             })
-        });
+        }).on("end", () => {
+            if (collected == true) return;
+            message.channel.send(`${message.author} | You kept me waiting too long. This is not polite at all! Run the command again to use it.`)
+        })
 
         message.channel.send(embed)
     })

@@ -4,8 +4,9 @@
 
 module.exports = {
     MinakoUtils: {
-        osu: require("./osu/OsuUtils"),
+        osu: require("./Osu/OsuUtils"),
         placeholders: require("./Placeholders/PlaceholderManager"),
-        bannedwords: require("./Systems/WordModeration")
+        bannedwords: require("./Systems/WordModeration"),
+        welcomer: require("./Systems/Welcomer")
     }
 }

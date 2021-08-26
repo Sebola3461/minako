@@ -2,7 +2,7 @@ const { MinakoDatabase } = require("../../db");
 const { parseMessage } = require("../Placeholders/PlaceholderManager");
 
 exports.analyseMessage = (message) => {
-    if (message.author.permission.has("MANAGE_MESSAGES")) return {
+    if (message.member.permissions.has("MANAGE_MESSAGES", "MANAGE_GUILD", "ADMIN", "MANAGE_CHANNELS")) return {
         code: 200
     };
 
@@ -22,7 +22,7 @@ exports.analyseMessage = (message) => {
     }
 
     if (checkPass == 0) return;
-    let modMessage = parseMessage(moderationSettings["banned_word_message"], message);
+    let modMessage = parseMessage(moderationSettings["banned_word_message"], message.member);
     message.delete()
     message.channel.send(modMessage)
     return {

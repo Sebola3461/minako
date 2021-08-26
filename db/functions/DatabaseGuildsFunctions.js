@@ -51,11 +51,15 @@ exports.appendNewGuild = (message) => {
             "channel_not_allowed_message": "Hey, you can't use commands here!",
             "users_commands_whitelist": [],
             "banned_words": [],
-            "banned_word_message": "NOOO! DONT SAY THIS AGAIN! BAKA"
+            "banned_word_message": "{user} Don't say this in front of Mina-chan!"
         },
-        "auditlog": {
-            "enabled": false,
+        "welcome": {
             "channel": "",
+            "message:": ""
+        },
+        "bye": {
+            "channel": "",
+            "message:": ""
         },
         "osu": {
             "enable_links": true
@@ -64,4 +68,17 @@ exports.appendNewGuild = (message) => {
     guildsDatabase.guilds[message.guild.id] = newGuild;
     writeFileSync(__dirname + "/../guilds.json", JSON.stringify(guildsDatabase), "utf8")
     console.log(`[Database] New guild added! ${message.guild.name} (${message.guild.id})`.bgGreen.black)
+}
+
+exports.updateGuildSyntax = (guildID, object_to_check, new_object) => {
+    let guildsDatabase = readFileSync(__dirname + "/../guilds.json", "utf8");
+    guildsDatabase = JSON.parse(guildsDatabase);
+    let selectedGuild = guildsDatabase.guilds[guildID];
+
+    if (selectedGuild[object_to_check] == undefined) {
+        selectedGuild[object_to_check] = new_object;
+    }
+
+    writeFileSync(__dirname + "/../guilds.json", JSON.stringify(guildsDatabase), "utf8")
+    console.log(`[Database] Guilds database object changed!`.bgBlue.black)
 }

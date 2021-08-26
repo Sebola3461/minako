@@ -20,7 +20,8 @@ exports.run = async(message, args) => {
         const embed = new MessageEmbed()
             .setTitle("Character search results for " + `"${args.join(" ")}"`)
             .setDescription("Type the number to select the character\n\n")
-            .setColor('#D9A0F3');
+            .setColor('#D9A0F3')
+            .setFooter("You have 10s to select")
 
         for (let i = 0; i < resultSize; i++) {
             filterArgs.push(new String(i + 1).valueOf())
@@ -28,15 +29,20 @@ exports.run = async(message, args) => {
         }
 
         const filter = (m) => m.content;
-        const collector = new MessageCollector(message.channel, filter, { time: 50000, max: 1 });
+        const collector = new MessageCollector(message.channel, filter, { time: 10000, max: 1 });
 
+        let collected = false;
         collector.on('collect', m => {
             if (!filterArgs.includes(m.content)) return;
+            collected = true;
             const index = new Number(m.content);
             return fetchCharacter(result[index - 1].id).then(character => {
                 sendCharacterEmbed(character, message)
             })
-        });
+        }).on("end", () => {
+            if (collected == true) return;
+            message.channel.send(`${message.author} | You kept me waiting too long. This is not polite at all! Run the command again to use it.`)
+        })
 
         message.channel.send(embed)
     })

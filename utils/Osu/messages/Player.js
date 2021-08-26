@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js")
-const { formatNumber } = require("./../../../commands/osu/functions/FormatNumber")
+const { formatNumber } = require("../../../commands/osu/functions/FormatNumber")
 
 exports.sendOsuPlayerEmbed = (user, mode, message) => {
     const embed = new MessageEmbed()
