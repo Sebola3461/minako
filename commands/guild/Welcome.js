@@ -72,9 +72,10 @@ exports.run = async(message, args) => {
 
             const filter = (reaction, user) => reaction.emoji.name == '☑' && user.id == message.author.id;
             const collector = m.createReactionCollector(filter, { time: 15000 });
-            collector.on('collect', () => testWelcome(m.guild.id, message, "welcome"));
+            collector.on('collect', () => testWelcome(message, "welcome"));
         })
     }
+
 
     if (args[0].toLowerCase() == "remove") {
 

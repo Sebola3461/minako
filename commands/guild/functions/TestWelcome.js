@@ -1,8 +1,8 @@
 const { MinakoDatabase } = require("../../../db");
 const { parseMessage } = require("../../../utils/Placeholders/PlaceholderManager");
 
-exports.testWelcome = (guildID, message, system) => {
-    let welcome = MinakoDatabase.guilds.getGuild(guildID)[system];
+exports.testWelcome = (message, system) => {
+    let welcome = MinakoDatabase.guilds.getGuild(message.guild.id)[system];
     let welcomeMessage = welcome["message"];
     welcomeMessage = parseMessage(welcomeMessage, message.member);
 
